@@ -1,14 +1,5 @@
 name: build
-on:
-  push:
-    paths:
-      - 'common/src/main/java/**'
-      - 'fabric/src/main/java/**'
-      - 'neoforge/src/main/java/**'
-      - '**/gradle.properties'
-      - '**/settings.gradle'
-      - '**/build.gradle'
-      - '.github/workflows/build.yml'
+on: push
 
 jobs:
   build:
@@ -32,3 +23,10 @@ jobs:
 
       - name: Execute Gradle build
         run: ./gradlew build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: Artifacts
+          path: |
+            ./*
